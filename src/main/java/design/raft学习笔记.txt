@@ -1,0 +1,23 @@
+服务器持久化
+    currentTerm         服务器已知最新的任期（在服务器首次启动时初始化为0，单调递增）
+    votedFor            当前任期内收到选票的 candidateId，如果没有投给任何候选人 则为空
+    log[]               日志条目；每个条目包含了用于状态机的命令，以及领导人接收到该条目时的任期（初始索引为1）
+
+服务器非持久化内容
+    commitIndex             已知已提交的最高的日志条目的索引（初始值为0，单调递增）
+    lastApplied             已经被应用到状态机的最高的日志条目的索引（初始值为0，单调递增）
+        leader 额外内容
+            nextIndex[]     对于每一台服务器，发送到该服务器的下一个日志条目的索引
+            matchIndex[]    对于每一台服务器，已知的已经复制到该服务器的最高日志条目的索引
+
+（AppendEntries）RPC
+    term            领导人的任期，如果收到的任期号小于自己的任期号，跟随者会拒绝请求，从而防止过时的领导者影响系统的状态
+    leaderId        领导人 ID 因此跟随者可以对客户端进行重定向
+    prevLogIndex    紧邻新日志条目之前的日志条目的索引
+    prevLogTerm     上个日志条目的任期
+    entries[]
+    leaderCommit    leaderCommit是领导人已知的已提交的最高日志条目的索引。用于更新
+返回
+    term
+    success
+

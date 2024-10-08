@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Console appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %c{1} - %msg%n"/>
+        </Console>
+
+        <!-- File appender for election logs -->
+        <File name="PersistenceFile" fileName="logs/persistence.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </File>
+        <File name="netFile" fileName="logs/net.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </File>
+        <File name="heartbeatFile" fileName="logs/heartbeat.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </File>
+        <File name="vote" fileName="logs/vote.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </File>
+        <File name="nodeState" fileName="logs/nodeState.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </File>
+
+    </Appenders>
+
+    <Loggers>
+        <!-- Logger for election module -->
+        <Logger name="persistence" level="info" additivity="false">
+            <AppenderRef ref="PersistenceFile"/>
+        </Logger>
+
+        <Logger name="net" level="debug" additivity="true">
+            <AppenderRef ref="netFile"/>
+        </Logger>
+
+        <!-- Logger for heartbeat module -->
+        <Logger name="heartbeat" level="warn" additivity="true">
+            <AppenderRef ref="heartbeatFile"/>
+        </Logger>
+        <Logger name="vote" level="info" additivity="true">
+            <AppenderRef ref="vote"/>
+        </Logger>
+
+        <Logger name="nodeState" level="info" additivity="true">
+            <AppenderRef ref="nodeState"/>
+        </Logger>
+
+<!--         设置 Netty 日志级别 -->
+<!--        <Logger name="io.netty" level="DEBUG" additivity="true">-->
+<!--            <AppenderRef ref="Console"/>-->
+<!--        </Logger>-->
+
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+        </Root>
+
+
+    </Loggers>
+</Configuration>
