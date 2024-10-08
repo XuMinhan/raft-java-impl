@@ -4,6 +4,8 @@
 
 #### 使用 kryo 作为序列化框架，用于 持久化 和 网络传输
 
+未经过完善测试，个人学习玩具
+
 参考文章
 
 * raft简略讲解 https://cloud.tencent.com/developer/article/2168468
